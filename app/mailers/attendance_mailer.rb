@@ -9,6 +9,6 @@ class AttendanceMailer < ApplicationMailer
     @url  = 'http://monsite.fr/login' 
 
     # c'est cet appel à mail() qui permet d'envoyer l’e-mail en définissant destinataire et sujet.
-    mail(to: @attendance.user.email, subject: 'Bienvenue chez nous !') 
+    mail(to: @attendance.event.user.email, subject: "Super, un nouveau participant s'est inscrit !") 
   end
 end
