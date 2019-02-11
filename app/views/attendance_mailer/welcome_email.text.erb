@@ -1,7 +1,7 @@
 Salut <%= @attendance.event.user.first_name %> et bienvenue chez nous !
 ==========================================================
  
-<%= @attendance.user.first_name %> s'est inscrit à l'évènement "<%= @attendance.event.title %>" qui aura lieu le <%= @attendance.start_date %> à <%@attendance.location %>
+<%= @attendance.user.first_name %> s'est inscrit à l'évènement "<%= @attendance.event.title %>" qui aura lieu le <%= @attendance.event.start_date %> à <%@attendance.event.location %>
  
 Pour accéder à ton espace client, connecte-toi via : <%= @url %>.
  
