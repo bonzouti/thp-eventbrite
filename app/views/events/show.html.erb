@@ -1,0 +1,21 @@
+<div class="jumbotron-fluid">
+  <div class="container">
+    <header class="p-5 text-center">
+    <h1 class="display-3"> <%= @event.title %> </h1>
+    <h2 class="m-4"> <%= @event.description %> </h2>
+    </header>
+
+    <div class="container mx-auto p-5 bg-light">
+      <p class="h5"> Créateur de l'évènement : <%= @event.user.first_name %></p>
+      <p class="h5"> Nombre de participants : <%= @event.attendances.count %> </p>    
+      <p class="h5"> Date de début de l'évènement : <%= @event.start_date%> </p>
+      <p class="h5"> Date de fin de l'évènement : à coder ! (avec une méthode) </p>
+      <p class="h5"> Prix : <%= @event.price %> € </p>    
+      <p class="h5"> Lieu : <%= @event.location%> </p>
+      <p> 
+    </div>
+    <div class="text-center">
+      <%= link_to "Retourner à l'accueil", root_path, class:"btn btn-outline-dark btn-lg my-5" %>
+    </div>
+  </div>
+</div>

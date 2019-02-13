@@ -1,2 +1,43 @@
-<h1>Events#new</h1>
-<p>Find me in app/views/events/new.html.erb</p>
+<div class="container text-center p-5 my-5">
+  <h1>Ajoute ton évènement !</h1>
+  <div class="create form-group text-left m-4">
+    <%= form_tag url_for(action: 'create'), method: "post", class: "needs-validation", :novalidate => true do %>
+      <div class="form-group">
+        <%= label_tag 'Titre' %>
+        <%= text_field_tag 'title', @title, class: "form-control", placeholder: "Un super titre qui casse des :)", :required => true %>
+      </div>
+
+      <div class="form-group">
+        <%= label_tag 'Description' %>
+        <%= text_area_tag 'description', @description, rows: 6, class: "form-control", placeholder: "Décris ton évènement de manière succinte", :required => true %>
+      </div>
+
+      <div class="form-row mb-4">
+        <div class="col">
+          <%= label_tag 'Prix' %>
+          <%= number_field_tag 'price', @price, in: 16...99, class: "form-control", placeholder: "Prix de l'entrée", :required => true %>
+        </div>
+        <div class="col">
+          <%= label_tag 'Lieu' %>
+          <%= text_field_tag 'location', @location, class: "form-control", placeholder: "Où les choses se passent", :required => true %>
+        </div>
+      </div>
+      
+      <div class="form-row mb-4">
+        <div class="col">
+          <%= label_tag "La durée de l'évènement" %>
+          <%= select_tag "duration", options_for_select([ 30, 60, 90 ], 30), class: 'form-control' %>
+        </div>
+        <div class="col">
+          <%= label_tag 'Choisis une date' %>
+          <%= date_field_tag(:start_date, Date.today, class: 'form-control')%>
+        </div>
+      </div>
+
+      <div class="nav-links my-5 text-center">
+        <%= submit_tag "Envoyer", class: "btn btn-primary btn-lg m-2" %>
+        <%= link_to "Retourner à l'accueil", root_path, class: "btn btn-outline-dark btn-lg m-2" %>
+      </div>
+    <% end %>
+  </div>  
+</div>
