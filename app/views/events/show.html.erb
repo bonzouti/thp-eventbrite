@@ -6,7 +6,7 @@
     <% if is_user_the_event_admin? %>
       <p class="h5"> <%= current_user.first_name %> tu es l'admistrateur de l'évènement </p>
       <% else %>
-      <%= link_to "Rejoindre l'évènement", root_path, class:"btn btn-primary btn-lg my-3" %>
+      <%= link_to "Rejoindre l'évènement", new_event_participation_path(@event.id), class:"btn btn-primary btn-lg my-3" %>
     <% end %>
     </header>
 

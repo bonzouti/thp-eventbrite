@@ -14,6 +14,7 @@ class EventsController < ApplicationController
   end
 
   def create
+    
     @event = Event.new(
       start_date: params[:start_date],
       duration: params[:duration],
@@ -23,6 +24,7 @@ class EventsController < ApplicationController
       location: params[:location],
       user_id: current_user.id)
     puts @event.errors
+
     if @event.save
       flash[:success] = "Ton évènement est sauvegardé !"
       redirect_to event_path(@event.id)

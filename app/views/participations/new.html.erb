@@ -1,0 +1,22 @@
+<div class="container text-center p-5 my-5 bg-light">
+  <h1><%= @event.title %></h1>
+
+  <%= form_tag event_participations_path do %>
+    <article>
+      <% if flash[:error].present? %>
+        <div id="error_explanation">
+          <p><%= flash[:error] %></p>
+        </div>
+      <% end %>
+      <label class="amount">
+        <span class="h3">Prix de l'évènement <%= @event.price %> €</span>
+      </label>
+    </article>
+
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+            data-description="<%= @event.title %>"
+            data-amount="500"
+            data-locale="auto"></script>
+  <% end %>
+</div>
