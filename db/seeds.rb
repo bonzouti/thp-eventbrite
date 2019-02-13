@@ -8,27 +8,27 @@
 
 # User created to test the production version with yopmail
 
-# 1.times do 
-#   User.create!(
-#     email: "shynn@yopmail.com",
-#     password: Faker::Internet.password(8),
-#     description: "Bonjour les moussaillons, izi life gang gang pop hold it down",
-#     first_name: "Shynn",
-#     last_name: "Obi"
-#   )
-# end
+1.times do 
+  User.create!(
+    email: "shynn@yopmail.com",
+    password: Faker::Internet.password(8),
+    description: "Bonjour les moussaillons, izi life gang gang pop hold it down",
+    first_name: "Shynn",
+    last_name: "Obi"
+  )
+end
 
-# 19.times do 
-#   User.create!(
-#     email: Faker::Internet.email,
-#     password: Faker::Internet.password(8),
-#     description: Faker::Hacker.say_something_smart,
-#     first_name: Faker::Name.first_name,
-#     last_name: Faker::Name.last_name
-#   )
-# end
+19.times do 
+  User.create!(
+    email: Faker::Internet.email,
+    password: Faker::Internet.password(8),
+    description: Faker::Hacker.say_something_smart,
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name
+  )
+end
 
-# puts "User created"
+puts "User created"
 
 # Creation of a event related to the first user
 1.times do
