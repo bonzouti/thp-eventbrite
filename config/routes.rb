@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users, only: [:show, :edit]
   resources :events, only: [:index, :new, :show, :create, :destroy] do
-    resources :participations, only: [:new, :index, :create, :destroy]
+    resources :participations, only: [:new, :index, :show, :create, :destroy]
   end
-  resources :charges
 end
