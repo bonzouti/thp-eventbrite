@@ -8,17 +8,13 @@
 
 # User created to test the production version with yopmail
 
-1.times do 
-  User.create!(
-    email: "shynn@yopmail.com",
-    password: Faker::Internet.password(8),
-    description: "Bonjour les moussaillons, izi life gang gang pop hold it down",
-    first_name: "Shynn",
-    last_name: "Obi"
-  )
-end
+Attendance.destroy_all
+Event.destroy_all
+User.destroy_all
 
-19.times do 
+puts "Database cleaned"
+
+20.times do 
   User.create!(
     email: Faker::Internet.email,
     password: Faker::Internet.password(8),
@@ -30,20 +26,7 @@ end
 
 puts "User created"
 
-# Creation of a event related to the first user
-1.times do
-  Event.create(
-    start_date: "2019-03-14",
-    duration: 15,
-    title: "Végane Burger Party",
-    description: "Dégustation de burgers véganes au tofu, soja, seitan, tempeh à Lyon, ça va être la folie! <3",
-    price: "5",
-    location: "Lyon",
-    user_id: 1
-  )
-end
-
-9.times do
+20.times do
   Event.create(
     start_date: Faker::Date.forward(10),
     duration: 15,
