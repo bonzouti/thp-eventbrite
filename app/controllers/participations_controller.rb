@@ -1,5 +1,12 @@
 class ParticipationsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :index, :show]
+
   def index
+    @event = Event.find(params[:event_id])
+    @attendances = @event.attendances
+  end
+
+  def show
   end
 
   def new
@@ -38,7 +45,7 @@ class ParticipationsController < ApplicationController
 
   rescue Stripe::CardError => e
     flash[:error] = e.message
-    redirect_to new_charge_path
+    redirect_to @event
   end
 
 end

@@ -3,21 +3,28 @@
     <header class="p-5 text-center">
     <h1 class="display-3"> <%= @event.title %> </h1>
     <h2 class="m-4"> <%= @event.description %> </h2>
-    <% if is_user_the_event_admin? %>
+    <% if user_is_the_event_admin? %>    
       <p class="h5"> <%= current_user.first_name %> tu es l'admistrateur de l'évènement </p>
-      <% else %>
+    <% elsif user_is_not_attending_the_event? %>
+      <p class="p">Pour participer à cet évènement, il te suffit de t'inscrire ou de te connecter à ton compte</p>
+      <%= link_to "Inscription", new_user_registration_path, class:"btn btn-primary btn-lg"%>
+      <%= link_to "Connexion", new_user_session_path, class:"btn btn-outline-dark btn-lg" %>
+    <% elsif is_user_an_attendee? %>
+      <p> Tu participes déjà à cet évènement :)</p>
+    <% else %>
       <%= link_to "Rejoindre l'évènement", new_event_participation_path(@event.id), class:"btn btn-primary btn-lg my-3" %>
     <% end %>
     </header>
-
     <div class="container mx-auto p-5 bg-light">
+      <% if user_is_the_event_admin? %>
+        <%= link_to "Mon Espace évènements", event_participations_path(@event.id), class:"btn btn-primary btn-lg mb-4" %>
+      <% end %>    
       <p class="h5"> Créateur de l'évènement : <%= @event.user.first_name %></p>
       <p class="h5"> Nombre de participants : <%= @event.attendances.count %> </p>
-      <p class="h5"> Date de début de l'évènement : <%= @event.start_date%> </p>
-      <p class="h5"> Date de fin de l'évènement : à coder ! (avec une méthode) </p>
+      <p class="h5"> Date de début de l'évènement : <%= @event.start_date.strftime("%d-%m-%Y")%> </p>
+      <p class="h5"> Date de fin de l'évènement : à coder ! (avec une méthode)</p>
       <p class="h5"> Prix : <%= @event.price %> € </p>
       <p class="h5"> Lieu : <%= @event.location%> </p>
-      <p> 
     </div>
     <div class="text-center my-5">
       <%= link_to "Retourner à l'accueil", root_path, class:"btn btn-outline-dark btn-lg my-5" %>

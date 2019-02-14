@@ -1,5 +1,5 @@
 <div class="container text-center p-5 my-5 bg-light">
-  <h1><%= @event.title %></h1>
+  <h1 class="mb-3"><%= @event.title %></h1>
 
   <%= form_tag event_participations_path do %>
     <article>
@@ -8,8 +8,9 @@
           <p><%= flash[:error] %></p>
         </div>
       <% end %>
+      <h4 class="mb-3">Pour participer à cet évènement, <br> tu dois payer la modique somme de : </h4>      
       <label class="amount">
-        <span class="h3">Prix de l'évènement <%= @event.price %> €</span>
+        <span class="h3"><%= @event.price %> €</span>
       </label>
     </article>
 

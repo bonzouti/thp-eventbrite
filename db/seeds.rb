@@ -14,7 +14,7 @@ User.destroy_all
 
 puts "Database cleaned"
 
-20.times do 
+25.times do 
   User.create!(
     email: Faker::Internet.email,
     password: Faker::Internet.password(8),
@@ -27,7 +27,7 @@ end
 puts "User created"
 
 20.times do
-  Event.create(
+  Event.create!(
     start_date: Faker::Date.forward(10),
     duration: 15,
     title: Faker::Lorem.sentence(4),
@@ -41,7 +41,7 @@ end
 puts "Events created"
 
 30.times do 
-  Attendance.create(
+  Attendance.create!(
     stripe_customer_id: Faker::Number.number(10),
     user: User.all.sample,
     event: Event.all.sample 

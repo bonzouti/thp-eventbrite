@@ -1,16 +1,42 @@
 class EventsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :destroy, :update]
   
   def index
     @events = Event.all
   end
 
   def new
-    @event = Event.new
   end
 
   def show
     @event = Event.find(params[:id])
+  end
+
+  def edit 
+    @event = Event.find(params[:id])
+  end
+
+  def update
+    @event = Event.find(params[:id])
+
+    if @event.update(post_params)
+      redirect_to @event
+      flash[:success] = "Bravo"
+    else
+      render :edit
+      flash[:danger] = "Raté"
+    end
+  end
+
+  def destroy
+    @event = Event.find(params[:id])
+    @attendees_of_the_event = @event.attendances
+    @attendees_of_the_event.each do |attendee|
+      attendee.destroy
+    end
+    @event.destroy
+    redirect_to events_path
+    flash[:success] = "L'évènement a bien été supprimé !"
   end
 
   def create
@@ -23,6 +49,7 @@ class EventsController < ApplicationController
       price: params[:price],
       location: params[:location],
       user_id: current_user.id)
+
     puts @event.errors
 
     if @event.save
@@ -32,6 +59,12 @@ class EventsController < ApplicationController
       flash[:error] = "Ton évènement n'a pas pu être sauvé! Merde alors :("
       render :new
     end
+  end
+
+  private
+
+  def post_params
+    params.require(:event).permit(:title, :description, :price, :location, :duration, :start_date)
   end
 
 end

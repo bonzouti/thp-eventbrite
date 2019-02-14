@@ -1,0 +1,45 @@
+<div class="container p-5 my-5 bg-light w-75">
+  <header class="my-5">
+    <h1 class="text-center">Modifier l'évènement</h1>
+  </header>
+  <!-- Formulaire pour modifier l'event -->
+  <%= form_for @event do |f| %>
+    <div class="form-group">
+      <%= f.label "Titre" %>
+      <%= f.text_field :title, class: "form-control", placeholder: @event.title %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label "Description" %>
+      <%= f.text_area :description, class: "form-control", rows:6, placeholder: @event.description %>
+    </div>
+
+    <div class="form-row mb-4">
+      <div class="col">
+        <%= f.label "Prix" %>
+        <%= f.number_field :price, class: "form-control", placeholder: @event.price %>
+      </div>    
+      <div class="col">
+        <%= f.label "Location" %>
+        <%= f.text_field :location, class: "form-control", placeholder: @event.location %>
+      </div>
+    </div>
+
+    <div class="form-row mb-4">
+      <div class="col">
+        <%= f.label "Durée de l'évènement" %>
+        <%= f.number_field :duration, class: "form-control", placeholder: @event.duration %>
+      </div>    
+      <div class="col">
+        <%= f.label "Date de début" %>
+        <%= f.text_field :start_date, class: "form-control", placeholder: @event.start_date %>
+      </div>
+    </div>
+
+    <div class="nav-links mb-5">
+      <%= submit_tag "Sauvegarder", class: "btn btn-lg btn-primary m-2" %>
+      <%= link_to "Supprimer l'évènement", event_path(@event.id), class: "btn btn-outline-danger btn-lg m-2", action: "delete", method: :delete, data: { confirm: "Es-tu sûr de vouloir supprimer cet évènement ?"} %>
+      <%= link_to "Annuler", root_path, class: "btn btn-outline-dark btn-lg m-2" %>
+    </div>
+  <% end %>
+</div>
