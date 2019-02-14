@@ -1,5 +1,8 @@
 # THP EventBrite
 
+Lien de la version de production : 
+https://thp-anhek-eventbrite.herokuapp.com
+
 - Conception d'une application Rails de gestion d'évènements à la EventBrite.
 - Création d'une base de données SQL avec plusieurs Model : User, Event et Attendance.
 - Mise en place des tests unitaires Rspec
