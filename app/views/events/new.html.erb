@@ -1,9 +1,9 @@
-<div class="container text-center p-5 my-5">
+<div class="container text-center p-5 my-5 w-50">
   <h1>Ajoute ton évènement !</h1>
   <div class="create form-group text-left m-4">
-    <%= form_tag url_for(action: 'create'), method: "post", class: "needs-validation", :novalidate => true do %>
+    <%= form_tag url_for(action: 'create'), method: "post", multipart: true, class: "needs-validation", :novalidate => true do %>
       <div class="form-group">
-        <%= label_tag 'Titre' %>
+        <%= label_tag 'Choisis un titre' %>
         <%= text_field_tag 'title', @title, class: "form-control", placeholder: "Un super titre qui casse des :)", :required => true %>
       </div>
 
@@ -31,7 +31,13 @@
         <div class="col">
           <%= label_tag 'Choisis une date' %>
           <%= date_field_tag(:start_date, Date.today, class: 'form-control')%>
+
         </div>
+      </div>
+
+      <div class="form">
+          <%= label_tag 'Ajoute une bannière' %>
+          <%= file_field_tag :banner %>
       </div>
 
       <div class="nav-links my-5 text-center">

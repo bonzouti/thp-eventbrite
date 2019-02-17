@@ -1,15 +1,30 @@
 <div class="bg-dark p-5">
   <div class="container bg-white text-center p-5 my-5 rounded">
+    <%if @user.avatar.attached?%>
+      <%= image_tag @user.thumbnail, alt: 'avatar' %>
+    <%else%>
+    <div class="bg-primary d-inline-block rounded-circle mb-4" style="height: 200px; width: 200px;">
+      <%= image_tag Faker::Avatar.image("avatar", "200x200")%>
+    </div>
+    <%end%>
     <h1> <%= current_user.first_name %> <%= current_user.last_name %> </h1>
     <h2 class="h3"> <%= current_user.email %></h2>
     <p class="h3 my-5"> <%= current_user.description %> </p>
     <%= link_to "Modifier ses informations importantes", edit_user_registration_path, class:"" %>
+    
+    <h3>Changer d'avatar ?</h3>
+    <%= form_tag user_avatars_path(@user), multipart: true do %>
+      <%= file_field_tag :avatar %>
+      <%= submit_tag "mettre à jour" %>
+    <% end %>
+
     <hr class="my-5">
+
     <div class="">
     <h3>Evènements postés :</h3>
       <% current_user.events.each do |event| %>
         <h4> <%= event.title %> <%= link_to "Voir l'évènement", event_path(event.id), class:"" %></h4>
       <% end %>
-    </div>  
+    </div>
   </div>
 </div>

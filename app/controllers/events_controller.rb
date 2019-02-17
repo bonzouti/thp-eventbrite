@@ -1,6 +1,12 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :destroy, :update]
   
+  def datepicker_input form, field
+    content_tag :td, :data => {:provide => 'datepicker', 'date-format' => 'yyyy-mm-dd', 'date-autoclose' => 'true'} do
+      form.text_field field, class: 'form-control', placeholder: 'YYYY-MM-DD'
+    end
+  end
+    
   def index
     @events = Event.all
   end
@@ -20,6 +26,7 @@ class EventsController < ApplicationController
     @event = Event.find(params[:id])
 
     if @event.update(post_params)
+      @event.banner.attach(params[:banner])
       redirect_to @event
       flash[:success] = "Bravo"
     else
@@ -40,7 +47,6 @@ class EventsController < ApplicationController
   end
 
   def create
-    
     @event = Event.new(
       start_date: params[:start_date],
       duration: params[:duration],
@@ -50,21 +56,25 @@ class EventsController < ApplicationController
       location: params[:location],
       user_id: current_user.id)
 
-    puts @event.errors
-
     if @event.save
       flash[:success] = "Ton évènement est sauvegardé !"
+      saving_banner
       redirect_to event_path(@event.id)
     else
       flash[:error] = "Ton évènement n'a pas pu être sauvé! Merde alors :("
       render :new
     end
   end
+  
+  def saving_banner
+    @event = Event.find(@event.id)
+    @event.banner.attach(params[:banner])
+  end
 
   private
 
   def post_params
-    params.require(:event).permit(:title, :description, :price, :location, :duration, :start_date)
+    params.require(:event).permit(:title, :description, :price, :location, :duration, :start_date, :banner)
   end
 
 end

@@ -14,3 +14,12 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+
+$(function () {
+  $('[data-behaviour~=datepicker]').datepicker();
+})
+
+$(function () {
+  $(".dropdown-toggle").dropdown();
+})

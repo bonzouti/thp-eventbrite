@@ -3,7 +3,21 @@
     <header class="p-5 text-center">
     <h1 class="display-3"> <%= @event.title %> </h1>
     <h2 class="m-4"> <%= @event.description %> </h2>
-    <% if user_is_the_event_admin? %>    
+    <div class="picture">
+      <p><%=@event.id%></p>
+      <%if @event.banner.attached?%>
+        <%= image_tag @event.banner_width, alt: 'event picture', class:"w-100" %>
+      <%else%>
+        <p>Pas d'image d'évènement!</p>
+      <%end%>
+    </div>
+    <% if user_is_the_event_admin? %>
+      <div class="edit_banner">
+        <%= form_tag event_banners_path(@event), multipart: true do %>
+          <%= file_field_tag :banner %>
+          <%= submit_tag "mettre à jour" %>
+        <% end %>
+      </div>
       <p class="h5"> <%= current_user.first_name %> tu es l'admistrateur de l'évènement </p>
     <% elsif user_is_not_attending_the_event? %>
       <p class="p">Pour participer à cet évènement, il te suffit de t'inscrire ou de te connecter à ton compte</p>

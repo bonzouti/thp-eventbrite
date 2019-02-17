@@ -3,7 +3,7 @@
     <h1 class="text-center">Modifier l'évènement</h1>
   </header>
   <!-- Formulaire pour modifier l'event -->
-  <%= form_for @event do |f| %>
+  <%= form_for @event, multipart: true do |f| %>
     <div class="form-group">
       <%= f.label "Titre" %>
       <%= f.text_field :title, class: "form-control", placeholder: @event.title %>
@@ -32,7 +32,7 @@
       </div>    
       <div class="col">
         <%= f.label "Date de début" %>
-        <%= f.text_field :start_date, class: "form-control", placeholder: @event.start_date %>
+        <%= f.text_field :start_date, class: "form-control", placeholder: @event.start_date.strftime("%d-%m-%Y") %>
       </div>
     </div>
 

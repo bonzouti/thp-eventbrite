@@ -3,6 +3,8 @@ class Event < ApplicationRecord
   has_many :attendances
   has_many :users, through: :attendances
 
+  has_one_attached :banner
+
   validates :start_date, presence: true, unless: :start_date_cannot_be_in_the_past
   validates :duration, presence: true, numericality: { only_integer: true }
   validate :duration_is_a_multiple_of_five
@@ -25,6 +27,10 @@ class Event < ApplicationRecord
     unless duration.present? && duration % 5 == 0
       errors.add(:duration, "Doit être un multiple de 5")
     end
+  end
+
+  def banner_width
+    return self.banner.variant(resize: '800x400')
   end
 
 end
